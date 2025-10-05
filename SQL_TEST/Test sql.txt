@@ -1,0 +1,197 @@
+
+                                  TEST=SQL
+
+1. Write an SQL query to retrieve all employees' names and salaries from a table named
+`Employees`, ordered by salary in descending order.
+
+Ans=  select name,salary from employee order by salary desc;
++-----------+----------+
+| name      | salary   |
++-----------+----------+
+| Himanshu  | 34000.00 |
+| Pooja     | 28000.00 |
+| Shrikant  | 25000.00 |
+| Hiteshi   | 25000.00 |
+| Prathmesh | 25000.00 |
+| Shamal    | 24000.00 |
+| Shivani   | 24000.00 |
+| Yogesh    | 23000.00 |
+| Vinay     | 23000.00 |
+| Sneha     | 23000.00 |
+| Amol      | 21000.00 |
++-----------+----------+
+11 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------
+2. Retrieve the top 5 highest-paid employees from the `Employees` table.
+
+Ans=  select*from employee order by salary desc limit 5;
++-----+-----------+----------+----------+--------+------------+------+------+
+| eid | name      | address  | salary   | gender | j_date     | age  | did  |
++-----+-----------+----------+----------+--------+------------+------+------+
+| 116 | Himanshu  | Nanded   | 34000.00 | M      | 2023-03-12 |   22 |    2 |
+| 112 | Pooja     | Pune     | 28000.00 | F      | 2023-10-12 |   22 | NULL |
+| 102 | Shrikant  | Pune     | 25000.00 | M      | NULL       |   24 |    3 |
+| 103 | Hiteshi   | Parbhani | 25000.00 | F      | NULL       |   22 |    1 |
+| 115 | Prathmesh | Nanded   | 25000.00 | M      | NULL       |   22 |    1 |
++-----+-----------+----------+----------+--------+------------+------+------+
+5 rows in set (0.00 sec)
+----------------------------------------------------------------------------------------------------------
+3. Fetch employee records from the `Employees` table, skipping the first 3 records and showing
+the next 5 records.
+
+Ans=  select * from employee limit 3,5;
++-----+-----------+----------+----------+--------+------------+------+------+
+| eid | name      | address  | salary   | gender | j_date     | age  | did  |
++-----+-----------+----------+----------+--------+------------+------+------+
+| 104 | Vinay     | Pune     | 23000.00 | M      | 2022-04-15 |   25 |    1 |
+| 107 | Shamal    | Parbhani | 24000.00 | F      | 2023-06-21 |   21 |    2 |
+| 110 | Sneha     | Pune     | 23000.00 | F      | 2022-04-10 |   23 | NULL |
+| 112 | Pooja     | Pune     | 28000.00 | F      | 2023-10-12 |   22 | NULL |
+| 115 | Prathmesh | Nanded   | 25000.00 | M      | NULL       |   22 |    1 |
++-----+-----------+----------+----------+--------+------------+------+------+
+5 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------
+4. Write a query to count the number of employees in each department from the `Employees`
+table.
+
+Ans=  select did,count(*) from employee
+    -> group by did;
++------+----------+
+| did  | count(*) |
++------+----------+
+|    3 |        3 |
+|    1 |        3 |
+|    2 |        2 |
+| NULL |        3 |
++------+----------+
+4 rows in set (0.01 sec)
+----------------------------------------------------------------------------------------------------------------
+5. Fetch the department-wise average salary from the `Employees` table, only for departments
+where the average salary is greater than 50,000.
+
+Ans=  select did,avg(salary) from employee
+      group by did having avg(salary)>50000;
+Empty set (0.01 sec)
+----------------------------------------------------------------------------------------------------------------------------
+6. Retrieve a list of products from the `Products` table where the product name contains the word
+"Laptop" .
+Ans=  select * from products where product_name like '%laptop%';
++------------+----------------------+-------------+----------+----------------+
+| product_id | product_name         | category    | price    | stock_quantity |
++------------+----------------------+-------------+----------+----------------+
+|          1 | HP Laptop 15s        | Electronics | 55000.00 |             10 |
+|          2 | Dell Inspiron Laptop | Electronics | 60000.00 |              8 |
+|          5 | Asus Gaming Laptop   | Electronics | 75000.00 |              6 |
++------------+----------------------+-------------+----------+----------------+
+3 rows in set (0.00 sec)
+---------------------------------------------------------------------------------------------------------------------------------
+7. Extract the first three characters from the `student_name` column in the `Students` table.
+
+Ans= select student_name ,left(student_name,3)from students;
++--------------+----------------------+
+| student_name | left(student_name,3) |
++--------------+----------------------+
+| Jonathan     | Jon                  |
+| Priyanka     | Pri                  |
+| Rahul        | Rah                  |
+| Sneha        | Sne                  |
+| Amit         | Ami                  |
++--------------+----------------------+
+5 rows in set (0.00 sec)
+------------------------------------------------------------------------------------------------------------------------------------
+8. Fetch only those students from the `Students` table whose names start with the letter "A".
+
+Ans= select * from students
+    -> where student_name like'A%';
++------------+--------------+------+-------+--------+
+| student_id | student_name | age  | grade | city   |
++------------+--------------+------+-------+--------+
+|          5 | Amit         |   18 | 12th  | Nashik |
++------------+--------------+------+-------+--------+
+1 row in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+9. Write an SQL query to find the total number of orders placed in each month, considering only
+those months where more than 100 orders were placed.
+
+Ans=select month(order_date),count(order_id)
+    from Orders group by month(order_date)
+     having count(order_id)>100;
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+10.10. Get the total and average sales amount per category from the `Sales` table, considering only
+categories with total sales greater than 1,00,000.
+
+Ans= select category,sum(sales_amount),avg(sales_amount)
+     from sales group by category having sum(sales_amount)>100000;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+11. What does the following query return?
+SELECT COUNT(*) FROM Employees;
+a) The total number of employees
+b) The sum of salaries of employees
+c) The first record of the table
+d) An error message
+
+Ans =a) The total number of employees
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+12. What will be the output of the following query?
+SELECT LENGTH('Database');
+a) 9
+b) 8
+c) 10
+d) Error
+
+Ans= b) 8
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+13. Which of the following clauses is used to filter grouped results?
+a) WHERE
+b) ORDER BY
+c) HAVING
+d) GROUP BY
+
+Ans= c) Having 
+------------------------------------------------------------------------------------------------------------------------------------------------------
+14. What does `LEFT JOIN` do?
+a) Returns only the matching rows from both tables
+b) Returns all rows from the left table and matching rows from the right table
+c) Returns all rows from the right table and matching rows from the left table
+d) Returns all rows from both tables
+
+Ans=b) Returns all rows from the left table and matching rows from the right table.
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+15. What will be the result of the following query?
+SELECT UPPER('hello world');
+a) hello world
+b) HELLO WORLD
+c) Hello World
+d) Syntax error
+
+Ans= b) HELLO WORLD
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+16. Question:
+You have two tables:
+• Orders with columns: order_id, customer_id, order_date, total_amount.
+• Customers with columns: customer_id, region.
+• O/P- region | total_orders
+Write an SQL query to find the total order amount (total_amount) for each region. Only include
+regions where the total order amount is greater than 10000
+
+Ans=select c.region, SUM(o.total_amount)FROM 
+     orders o join customers c on 
+     o.customer_id = c.customer_id
+     group by c.region having
+    sum(o.total_amount) > 10000;
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+17. Question:
+You have two tables:
+• Books with columns: book_id, author_id, title, price.
+• Sales with columns: sale_id, book_id, sale_date, quantity.
+• O/P- author_id | total_books_sold
+
+Write an SQL query to find the total number of books sold by each author. Only include authors
+who have sold more than 100 books.
+
+Ans= select b.author_id,sum(s.quantity)from book
+     b join sales son b.book_id=s.book_id
+     group by b.author having sum(s.quantity)>100;
+--------------------------------------------------------------------************************************************---------------------------------------------------------------
